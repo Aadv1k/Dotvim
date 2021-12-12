@@ -54,16 +54,38 @@ vim.cmd[[
 vim.cmd[[
     autocmd BufRead *.html,*.htm call SetHtmlMode()
     function! SetHtmlMode() 
-        nmap <CR> <c-y>, " emmet
+        nmap <Space> <c-y>, " emmet
     endfunction
 ]]
 
 -- Plugin conf 
--- local lsp = require 'lspconfig'
--- lsp.pyright.setup{}
+local lsp = require 'lspconfig'
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+--- PYTHON
+lsp.pyright.setup{
+  capabilities = capabilities,
+}
+
+-- CSS
+lsp.cssls.setup{
+  capabilities = capabilities,
+}
+
+-- HTML
+lsp.html.setup {
+  capabilities = capabilities,
+}
+
+-- TS/JS
+lsp.tsserver.setup{
+  capabilities = capabilities,
+}
+
 
 require'nvim-treesitter.configs'.setup {
-  ignore_install = { "javascript" },
+  ignore_install = { "html" },
   highlight = {
     enable = true,
   },
@@ -72,10 +94,10 @@ require'nvim-treesitter.configs'.setup {
 vim.g.neoformat_enabled_python = {'autopep8', 'yapf', 'docformatter'}
 vim.g.neoformat_enabled_javascript = {'prettier',}
 
-vim.g.onedark_style = 'darker' -- dark darker deep cool warm warmer
-require('onedark').setup()
+-- vim.g.onedark_style = 'darker' -- dark darker deep cool warm warmer
+-- require('onedark').setup()
+vim.cmd[[ color gruvbox ]]
 
---[[
 local cmp = require 'cmp'
 cmp.setup {
 
@@ -87,10 +109,8 @@ cmp.setup {
 
 
     mapping = {
-        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
@@ -99,15 +119,14 @@ cmp.setup {
     },
 
     sources = {
-        { name = 'nvim_lua' },
+        { name = 'vsnip' },
         { name = 'nvim_lsp' },
         { name = 'path' },
         { name = 'buffer', keyword_length = 5},
-        { name = 'vsnip' },
+        { name = 'nvim_lua' },
     },
 
     experimental = {
       native_menu = false,
     }
-}
-]]
+  }
