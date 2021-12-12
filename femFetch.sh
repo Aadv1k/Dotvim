@@ -12,5 +12,3 @@ curl -O https://codeload.github.com/frontendmentorio/$1/zip/refs/heads/main
 unzip main -d $FOL
 mv $FOL/${1}-main/* $FOL/
 rm -rf $FOL/${1}-main main
-
-
