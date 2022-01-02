@@ -103,6 +103,13 @@ set -o vi
 
 # https://unix.stackexchange.com/questions/105958/terminal-prompt-not-wrapping-correctly
 
+fortune | cowsay -f tux
+
+# WINDOWS SPECEFIC
+alias wincd="cd /mnt/c/users/aadv1k/"
+alias winr="powershell.exe $1 $2 $3 $4"
+alias git="git.exe"
+
 RED="\[\e[31m\]"
 GREEN="\[\e[32m\]"
 YELLOW="\[\e[33m\]"
@@ -113,14 +120,8 @@ GRAY="\[\e[90m\]"
 
 ITALICCYAN="\[\e[3;35m\]"
 ENDCOLOR="\[\e[0m\]"
-
-
-#PYTHONV="$(python3 --version) 🐍 "
-NODEV="Node $(node -v) 🔸 "
-#NPMV="NPM $(npm -v) 📦 "
 	
-	PS1="${RED}[${ENDCOLOR}${YELLOW}\u${ENDCOLOR}${GRAY}@${ENDCOLOR}${GREEN}\h${ENDCOLOR} ${CYAN}\W${ENDCOLOR}${RED} Using ${ENDCOLOR}${GRAY}${PYTHONV}${NODEV}${NPMV}${ENDCOLOR}${RED}]${ENDCOLOR}${ENDCOLOR}\n${MAGENTA}>${ENDCOLOR} "
-
+PS1="${RED}[${ENDCOLOR}${YELLOW}\u${ENDCOLOR}${GRAY}@${ENDCOLOR}${GREEN}\h${ENDCOLOR} ${CYAN}\W${ENDCOLOR}${RED}]${ENDCOLOR}${ENDCOLOR}\n${MAGENTA}>${ENDCOLOR} "
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
