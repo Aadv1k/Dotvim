@@ -1,6 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 case $- in
     *i*) ;;
@@ -105,10 +102,11 @@ set -o vi
 
 fortune | cowsay -f tux
 
-# WINDOWS SPECEFIC
+# WINDOWS SPECIFIC
 alias wincd="cd /mnt/c/users/aadv1k/"
 alias winr="powershell.exe $1 $2 $3 $4"
-alias git="git.exe"
+alias gitcd="cd /mnt/c/users/aadv1k/documents/github"
+#alias git="git.exe"
 
 RED="\[\e[31m\]"
 GREEN="\[\e[32m\]"
@@ -126,3 +124,4 @@ PS1="${RED}[${ENDCOLOR}${YELLOW}\u${ENDCOLOR}${GRAY}@${ENDCOLOR}${GREEN}\h${ENDC
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -1,6 +1,9 @@
-set exrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A Plain vanilla vim config, without plugins or neovim exclusive stuff. 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nu
+set exrc
 set smartindent
 set autoindent
 set tabstop=2 softtabstop=2
@@ -13,9 +16,8 @@ set incsearch
 
 autocmd BufRead *.md,*.rst,*.txt, call SetWritingMode()
 function! SetWritingMode()
-  set nonu
-  set spelllang=en_in
   set spell!
+  set spelllang=en_in
   nmap K 1z=
 endfunction
 
@@ -27,10 +29,6 @@ function! SetFourTab()
   set softtabstop=4
   set shiftround 
 endfunction
-
-
-set nocp
-filetype plugin on
 
 tmap <Esc> <c-\><c-n>
 
@@ -46,11 +44,3 @@ cnoreabbrev Wq wq
 cnoreabbrev WQ wq
 cnoreabbrev Q q
 cnoreabbrev so so %
-
-call plug#begin(stdpath('data'))
-  Plug 'gruvbox-community/gruvbox'
-  Plug 'lifepillar/vim-gruvbox8'
-call plug#end()
-
-color gruvbox
-

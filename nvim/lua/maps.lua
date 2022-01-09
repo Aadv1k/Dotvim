@@ -21,9 +21,7 @@ vim.api.map(',', ',<c-g>u', 'i')
 vim.api.map('.', '.<c-g>u', 'i')
 vim.api.map('!', '!<c-g>u', 'i')
 vim.api.map('?', '?<c-g>u', 'i')
-
 vim.api.map('(', '(<c-g>u', 'i')
-
 
 vim.api.map('<Esc>', '<c-\\><c-n>', 't')
 

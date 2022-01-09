@@ -15,7 +15,7 @@ vim.opt.incsearch=true
 vim.opt.splitright=true
 vim.opt.splitbelow=true
 
--- Disable auto comment insertion
+-- Disable auto comment insertion does not work
 vim.bo.fo=vim.bo.fo:gsub('cro', '')
 
 -- Netrw conf
