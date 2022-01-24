@@ -1,0 +1,72 @@
+set guifont=fixedsys:h14
+
+syntax on
+set nu
+set guicursor=
+set smartindent autoindent
+set expandtab
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set hidden
+set noerrorbells
+set nowrap
+
+set incsearch
+set nohlsearch
+set smartcase
+set ignorecase
+
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
+set textwidth=79
+set scrolloff=8
+set splitright
+set cursorline
+set formatoptions-=cro
+
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+let g:netrw_browse_split=2
+let g:netrw_winsize=80
+
+let mapleader=" "
+
+tmap <Esc> <C-\><C-n>
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ( (<c-g>u
+
+augroup pyMode
+    autocmd FileType python nnoremap <silent> <Leader>fmt :silent exec ':!python -m autopep8 --in-place --aggressive %'<CR>:e<CR>
+    autocmd FileType python  nnoremap <Leader>py :!python %<cr>
+augroup end 
+autocmd FileType python :augroup pyMode<CR>
+
+autocmd BufRead,BufReadPost *.js,*.md,*.css,*.html,*.scss nmap <silent> <Leader>fmt :silent exec '!prettier --write %'<CR>:e<CR>
+autocmd BufRead,BufReadPost *.c nmap <Leader>cc :execute "!gcc % -o " . expand('%:r')<CR>:execute "!./" . expand('%:r')<CR>
+
+nnoremap <Leader>lua :!lua %<cr>
+
+
+nmap <C-Right> :vertical res +2 <CR>
+nmap <C-Left> :vertical res -2 <CR>
+
+nnoremap J mzJ`z
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+nmap Y y$
+vmap > >gv
+vmap > >gv
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+cnoreabbrev W w
+cnoreabbrev Wq wq
+cnoreabbrev WQ wq
+cnoreabbrev Q q
+cnoreabbrev so so %
