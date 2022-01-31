@@ -1,5 +1,8 @@
 set guifont=fixedsys:h14
 
+color gruvbox
+set background=dark
+
 syntax on
 set nu
 set guicursor=
@@ -26,30 +29,59 @@ set scrolloff=8
 set splitright
 set cursorline
 set formatoptions-=cro
+set encoding=utf-8
 
 let g:netrw_liststyle=3
 let g:netrw_banner=0
 let g:netrw_browse_split=2
 let g:netrw_winsize=80
 
-let mapleader=" "
+""""""""""""""""""""""""
+""""""""""""""""""""""""
+""""""""Autocmds""""""""
+""""""""""""""""""""""""
+""""""""""""""""""""""""
 
+augroup htmlMode
+    autocmd!
+    autocmd BufRead,BufReadPost *.js,*.md,*.css,*.html,*.scss nmap <silent> <Leader>fmt :silent exec '!prettier --write %'<CR>:e<CR>
+    "" Inefficient, but hey it works.
+    autocmd FileType html nmap <CR> F<lywo<Esc>pI</<Esc>A><Esc>O
+augroup END
+
+augroup pyMode
+    autocmd!
+    autocmd FileType python nnoremap <silent> <Leader>fmt :silent exec ':!python -m autopep8 --in-place --aggressive %'<CR>:e<CR>
+    autocmd FileType python nnoremap <Leader>py :!python %<cr>
+augroup END
+
+augroup cppMode
+    autocmd!
+    autocmd FileType c nmap <silent> <Leader>cc :execute '!gcc % -o ' . expand('%:r') . ' && ' . expand('%:r') <CR>
+    autocmd FileType cpp nmap <silent> <Leader>cc :execute '!g++ % -o' . expand('%:r') . ' && ' . expand('%:r') <CR>
+augroup END
+
+augroup luaMode 
+    autocmd!
+    autocmd FileType lua nnoremap <Leader>lua :!lua %<cr>
+augroup END
+
+"""""""""""""""""""""""
+"""""""""""""""""""""""
+""""""""Keymaps""""""""
+"""""""""""""""""""""""
+"""""""""""""""""""""""
+
+let mapleader=" "
 tmap <Esc> <C-\><C-n>
+tmap <C-v> <C-W>"+
+
+nmap <silent> <S-l> :tabn<CR>
+nmap <silent> <S-h> :tabp<CR>
+
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap ( (<c-g>u
-
-augroup pyMode
-    autocmd FileType python nnoremap <silent> <Leader>fmt :silent exec ':!python -m autopep8 --in-place --aggressive %'<CR>:e<CR>
-    autocmd FileType python  nnoremap <Leader>py :!python %<cr>
-augroup end 
-autocmd FileType python :augroup pyMode<CR>
-
-autocmd BufRead,BufReadPost *.js,*.md,*.css,*.html,*.scss nmap <silent> <Leader>fmt :silent exec '!prettier --write %'<CR>:e<CR>
-autocmd BufRead,BufReadPost *.c nmap <Leader>cc :execute "!gcc % -o " . expand('%:r')<CR>:execute "!./" . expand('%:r')<CR>
-
-nnoremap <Leader>lua :!lua %<cr>
-
 
 nmap <C-Right> :vertical res +2 <CR>
 nmap <C-Left> :vertical res -2 <CR>
@@ -58,9 +90,9 @@ nnoremap J mzJ`z
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-nmap Y y$
-vmap > >gv
-vmap > >gv
+nnoremap Y y$
+vnoremap > >gv
+vnoremap > >gv
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
